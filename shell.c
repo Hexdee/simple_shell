@@ -5,6 +5,8 @@
 /**
  * main - Entry point
  * Description: A simple shell
+ * @ac: cli argument count
+ * @av: vector of arguments
  * Return: Always 0 (Success)
  */
 
