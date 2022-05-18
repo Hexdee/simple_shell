@@ -16,7 +16,7 @@ int executeCommand(char *command)
 	int wstatus;
 	pid_t child_pid;
 
-	char *argv[] = { command, NULL };
+	char *argv[] = { NULL, NULL };
 	char *environ[] = { NULL };
 
 	child_pid = fork();
@@ -28,7 +28,7 @@ int executeCommand(char *command)
 
 	if (child_pid == 0)
 	{
-		if (execve(command, argv, 0) < 0)
+		if (execve(command, argv, environ) < 0)
 		{
 			perror("execve");
 			exit(EXIT_FAILURE);

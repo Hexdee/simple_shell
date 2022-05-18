@@ -13,7 +13,6 @@ int main(int ac, char **av)
 	char *line = NULL;
 	size_t lineLen = 0;
 	int status, commandLen;
-	char **command = NULL;
 
 	if (ac > 1)
 	{
