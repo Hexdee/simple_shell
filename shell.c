@@ -8,13 +8,18 @@
  * Return: Always 0 (Success)
  */
 
-int main(void)
+int main(int ac, char **av)
 {
 	char *line = NULL;
 	size_t lineLen = 0;
 	int status, commandLen;
 	char **command = NULL;
 
+	if (ac > 1)
+	{
+		executeCommand(av[1]);
+		return (0);
+	}
 	do {
 		printf("$ ");
 		commandLen = getline(&line, &lineLen, stdin);
