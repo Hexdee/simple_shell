@@ -1,35 +1,33 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include "main.h"
 
 /**
  * main - Entry point
- * Description: A simple shell
- * Return: Always 0 (Success)
+ * Description: prints $, wait for the user to enter a command and print it
+ * Return: always 0
  */
 
-int main(void)
+int main(__attribute__((unused))int argc, char **argv)
 {
-	char *line = NULL;
-	size_t lineLen = 0;
-	int status, commandLen;
-	char **command = NULL;
-
-	do {
+	int i, cmdLen;
+	char *cmd = NULL;
+	size_t len = 0;
+	
+	while (1)
+	{
 		printf("$ ");
-		commandLen = getline(&line, &lineLen, stdin);
+		cmdLen = getline(&cmd, &len, stdin);
 		if (feof(stdin))
 		{
-			free(line);
+			printf("\n");
+			free(cmd);
 			exit(EXIT_SUCCESS);
 		}
-		line[commandLen - 1] = '\0';
-		status = executeCommand(line);
-
-		free(line);
-		line = NULL;
-		lineLen = 0;
-	} while (status);
-
+		cmd[cmdLen - 1] = '\0';
+		if(execute(cmd))
+			perror(argv[0]);
+	}
 	return (0);
 }
