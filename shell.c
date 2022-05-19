@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
 #include "main.h"
@@ -19,9 +20,9 @@ int main(__attribute__((unused))int argc, char **argv)
 
 	while (1)
 	{
-		printf("$ ");
+		write(STDIN_FILENO, "$ ", 3);
 		cmdLen = getline(&cmd, &len, stdin);
-		if (feof(stdin))
+		if (cmdLen == -1)
 		{
 			printf("\n");
 			free(cmd);
