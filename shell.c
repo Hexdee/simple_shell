@@ -20,11 +20,11 @@ int main(__attribute__((unused))int argc, char **argv)
 
 	while (1)
 	{
-		write(STDIN_FILENO, "$ ", 2);
+		write(STDOUT_FILENO, "$ ", 2);
 		lineLen = getline(&line, &len, stdin);
 		if (lineLen == -1)
 		{
-			write(STDIN_FILENO, "\n", 1);
+			write(STDOUT_FILENO, "\n", 1);
 			free(line);
 			exit(EXIT_SUCCESS);
 		}
@@ -32,9 +32,6 @@ int main(__attribute__((unused))int argc, char **argv)
 		args = split_string(line, ' ');
 		if (execute(args))
 			perror(argv[0]);
-
-		if (!isatty(STDIN_FILENO))
-			break;
 	}
 	return (0);
 }
