@@ -7,7 +7,7 @@
 
 /**
  * execute - executes a command
- * @cmd: The command to execute
+ * @args: Vector of args to execute
  *
  * Return: 0 for success, -1 for failure
  */
