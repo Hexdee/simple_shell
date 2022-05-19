@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <unistd.h>
-#include <string.h>
 #include <stdlib.h>
 #include "main.h"
 
@@ -22,16 +21,21 @@ int main(__attribute__((unused))int argc, char **argv)
 	{
 		write(STDOUT_FILENO, "$ ", 2);
 		lineLen = getline(&line, &len, stdin);
+
 		if (lineLen == -1)
 		{
 			write(STDOUT_FILENO, "\n", 1);
 			free(line);
 			exit(EXIT_SUCCESS);
 		}
+
 		line[lineLen - 1] = '\0';
 		args = split_string(line, ' ');
+
 		if (execute(args))
 			perror(argv[0]);
+
+		free(args);
 	}
 	return (0);
 }
