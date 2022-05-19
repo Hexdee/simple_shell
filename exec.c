@@ -3,6 +3,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdio.h>
+#include "main.h"
 
 /**
  * execute - executes a command
@@ -11,19 +12,15 @@
  * Return: 0 for success, -1 for failure
  */
 
-int execute(char *cmd)
+int execute(char **const args)
 {
 	int child_status;
 	pid_t child_pid;
-	char *argv[2];
-
-	argv[0] = cmd;
-	argv[1] = NULL;
 
 	child_pid = fork();
 	if (child_pid == 0)
 	{
-		if (execve(cmd, argv, NULL))
+		if (execve(args[0], args, NULL))
 			return (-1);
 	}
 	else
